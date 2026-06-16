@@ -1,0 +1,13 @@
+# Settings locales/personales de Claude Code (no compartir)
+.claude/settings.local.json
+
+# Plano de OPERACIÓN del harness (NO pertenece a este repo — D-002)
+# Si por error aparecen aquí, no se versionan.
+claude-progress.txt
+harness-state.json
+execution-state.json
+
+# Archivos del SO
+Thumbs.db
+Desktop.ini
+.DS_Store

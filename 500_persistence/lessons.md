@@ -1,0 +1,50 @@
+# lessons.md — Lecciones aprendidas del proyecto "DataPure Harness"
+
+> Bitácora de aprendizajes. Cada lección incluye una **Regla para el futuro** (directriz obligatoria).
+> Lee el **Índice**; el detalle por ID abajo.
+
+## Índice
+
+| ID | Lección | Regla para el futuro (1 línea) |
+|----|---------|--------------------------------|
+| L-001 | Los subagentes son amnésicos por diseño | Workers escriben artefactos al filesystem y reportan solo el path; nunca contenido |
+| L-002 | Separar el plano de construcción del de operación | No mezclar `500_persistence/` con los state-files del harness en ejecución |
+| L-003 | Los harnesses tienen madurez desigual | Tratar 060–100 como esqueléticos: requieren completarse antes de operarse |
+| L-004 | No toda mención a `persistence/` es la carpeta de este repo | Al renombrar/refactorizar, distinguir plano de construcción vs. operación antes de tocar referencias |
+
+---
+
+## L-001 — Los subagentes son amnésicos por diseño
+**Contexto:** Surgió al aclarar dónde persisten su trabajo los subagentes.
+**Aprendizaje:** En Claude Code, cada llamada al `Agent` tool arranca un subagente con contexto
+limpio que no comparte memoria con otros. La persistencia NO está en el agente sino en el
+filesystem (E6) y en los state-files que escriben A/B/C.
+**Regla para el futuro:** Todo Worker debe (1) escribir su artefacto directamente al disco y
+(2) reportar al orquestador únicamente el path. Para reanudar tras un fallo, se lanza un Worker
+fresco que lee el artefacto existente — nunca se "recupera la memoria" del Worker.
+
+## L-002 — Separar el plano de construcción del de operación
+**Contexto:** La duda del usuario sobre quién registra el avance mientras se construye el harness.
+**Aprendizaje:** Hay dos proyectos con persistencias distintas: construir la máquina (aquí) y
+operarla (otra terminal). Confundirlos rompe la trazabilidad.
+**Regla para el futuro:** En esta terminal solo se toca `500_persistence/`. Los archivos
+`harness-state.json` / `execution-state.json` / `claude-progress.txt` pertenecen al harness en
+operación y viven fuera de este flujo de construcción.
+
+## L-003 — Los harnesses tienen madurez desigual
+**Contexto:** Al inspeccionar `700_harnesses/`, 010–050 están completos (Fase 1 + Workers + Rúbrica +
+Flujo) pero 060–100 solo tienen "Fase 0" (inputs/proceso/outputs).
+**Aprendizaje:** No todos los harnesses están listos para operarse tal cual.
+**Regla para el futuro:** Antes de ejecutar u operacionalizar 060–100, completarlos al nivel de
+detalle de 010–050. No asumir que un harness está "listo" por existir su archivo.
+
+## L-004 — No toda mención a `persistence/` es la carpeta de este repo
+**Contexto:** Al renombrar `persistence/`→`500_persistence/` (T-008/D-009), las definiciones de
+`700_harnesses/` contenían ~50 rutas `persistence/harness-state.json`, `execution-state.json`,
+`claude-progress.txt`. Esas pertenecen al **plano de operación** (el harness corriendo en otra
+terminal, D-002), no a la carpeta de construcción de este repo.
+**Aprendizaje:** Un mismo nombre de ruta puede referirse a planos distintos; un renombrado global
+ciego (replace-all) habría corrompido las definiciones del harness.
+**Regla para el futuro:** Antes de aplicar un renombrado/refactor de rutas, clasificar cada
+referencia por plano (construcción vs. operación, D-002). Solo tocar las del plano que se está
+modificando; dejar intactas las del otro.
