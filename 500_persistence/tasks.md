@@ -12,9 +12,11 @@
 | T-003 | HECHA | Crear `CLAUDE.md` con descripción del proyecto y protocolo de sesión |
 | T-004 | HECHA | Crear los comandos `next` y `progress` (`/pure-next`, `/pure-progress`) |
 | T-008 | HECHA | Renombrar las carpetas del proyecto (prefijo numérico) |
-| T-005 | PRÓXIMA | Decidir la **meta del proyecto** (operacionalizar vs. completar 060–100 vs. ejecutar 010) |
+| T-007 | HECHA | Git/GitHub (init `main` + remote + autopush en `/pure-progress`) |
+| T-005 | HECHA | Decidir la **meta del proyecto** → construir el harness 010 (brief→diseño→plan→construir) |
+| T-009 | HECHA | Ciclo de definición del harness 010: brief + diseño + plan (los 3 APROBADOS) |
+| T-010 | PRÓXIMA | **Construir el harness 010** ejecutando el plan: INC-0 (andamiaje + P-1/P-2/P-3) → INC-1 (walking skeleton) |
 | T-006 | PRÓXIMA | Reconciliar nombres/numeración de harnesses (statement §9 ↔ `700_harnesses/`) y mapear el 100 a capas |
-| T-007 | PRÓXIMA | Decidir git/GitHub (init local + remote) para trazabilidad (E1/P8) |
 
 ---
 
@@ -44,14 +46,27 @@ Aplicado el esquema con prefijo numérico (D-009): `500_persistence/`, `700_harn
 referencias a `persistence/...` dentro de `700_harnesses/` se conservaron (plano de operación,
 D-002 / L-004). Detalle en `progress.md` → S-003.
 
-## T-005 — Decidir la meta del proyecto — PRÓXIMA
-Elegir el enfoque: (a) operacionalizar el harness en Claude Code, (b) completar primero las
-definiciones 060–100, o (c) empezar a ejecutar desde el 010. Bloquea el plan de construcción.
+## T-005 — Decidir la meta del proyecto — HECHA
+Meta elegida: **construir el harness 010 (Discovery)** siguiendo el orden brief→diseño→plan→construir,
+usando `700_harnesses/` como referencia. Resuelve D-007 (FIRME). Detalle en `progress.md` → S-004.
+
+## T-007 — Git/GitHub — HECHA
+`git init -b main`, remote `origin` a `https://github.com/jdrodriguez1000/DataPure_Harness.git`,
+`.gitignore` + `.gitattributes`, commit inicial y push. `/pure-progress` ahora hace commit+push al
+cierre (D-010). Detalle en `progress.md` → S-004.
+
+## T-009 — Ciclo de definición del harness 010 — HECHA
+Creados y APROBADOS los 3 documentos del 010: `900_brief/010_discovery.md`,
+`905_design/010_discovery.md`, `910_plan/010_discovery.md`. El diseño fija el modelo de ejecución
+plano (D-011). Detalle en `progress.md` → S-004.
+
+## T-010 — Construir el harness 010 — PRÓXIMA
+Ejecutar `910_plan/010_discovery.md`. Empezar por **INC-0**: crear el andamiaje
+`920_build/010_discovery/` y **cerrar las decisiones abiertas P-1** (ubicación de artefactos
+construidos), **P-2** (forma del Governor: CLAUDE.md del harness + comando) y **P-3** (modelo por
+agente). Luego **INC-1**: walking skeleton end-to-end (A→B→1 worker→C produce un artefacto) para
+validar el modelo plano antes de ensanchar.
 
 ## T-006 — Reconciliar harnesses — PRÓXIMA
 Alinear nombres y numeración entre `800_documents/statement.md` §9 y `700_harnesses/`; decidir cómo
 encaja `100_change_harness` en las dos capas de la metodología.
-
-## T-007 — Decidir git/GitHub — PRÓXIMA
-La metodología exige git + remote desde el arranque (E1/P8). Hoy el repo no está inicializado.
-Definir: `git init` local ahora y conectar remote GitHub cuando el usuario lo provea.

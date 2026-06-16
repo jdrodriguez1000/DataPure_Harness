@@ -32,8 +32,18 @@ orientada sin gastar tokens.
 6. **Actualiza `lessons.md`**: registra cada lección nueva como `L-xxx` con su **Regla para el
    futuro**.
 7. **Verifica** que los 4 índices quedaron coherentes con el detalle de abajo.
-8. **Reporta** al usuario un resumen corto de qué entradas creaste/actualizaste (IDs), sin volcar
-   el contenido completo.
+8. **Sube al repositorio** los cambios de la sesión (commit + push a GitHub):
+   - Repo: `https://github.com/jdrodriguez1000/DataPure_Harness.git`, rama `main`.
+   - `git add -A` (versiona toda la sesión, no solo `500_persistence/`).
+   - `git commit` con un mensaje en español que resuma la sesión y referencie los IDs tocados
+     (p. ej. `docs(persistence): cierre S-xxx — <resumen>` y mencionando T/D/L afectados).
+     Termina el mensaje con la línea `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+   - `git push origin main`. Si el push falla por autenticación, NO reintentes en bucle: informa al
+     usuario y sugiérele ejecutar `! git push origin main` en su sesión para autenticarse.
+   - Si no hubo nada que commitear (`git status` limpio), indícalo y omite el push.
+   - **No** uses `--no-verify` ni fuerces el push.
+9. **Reporta** al usuario un resumen corto de qué entradas creaste/actualizaste (IDs) y el hash del
+   commit subido, sin volcar el contenido completo.
 
 Si en la sesión no hubo cambios en alguna de las 4 dimensiones, indícalo explícitamente y no
 inventes entradas.

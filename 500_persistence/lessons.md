@@ -11,6 +11,7 @@
 | L-002 | Separar el plano de construcción del de operación | No mezclar `500_persistence/` con los state-files del harness en ejecución |
 | L-003 | Los harnesses tienen madurez desigual | Tratar 060–100 como esqueléticos: requieren completarse antes de operarse |
 | L-004 | No toda mención a `persistence/` es la carpeta de este repo | Al renombrar/refactorizar, distinguir plano de construcción vs. operación antes de tocar referencias |
+| L-005 | Verificar capacidades de la plataforma en la doc, no de memoria | Ante restricciones de Claude Code, consultar docs actuales (find-docs/WebFetch) antes de fijar arquitectura |
 
 ---
 
@@ -48,3 +49,14 @@ ciego (replace-all) habría corrompido las definiciones del harness.
 **Regla para el futuro:** Antes de aplicar un renombrado/refactor de rutas, clasificar cada
 referencia por plano (construcción vs. operación, D-002). Solo tocar las del plano que se está
 modificando; dejar intactas las del otro.
+
+## L-005 — Verificar capacidades de la plataforma en la doc, no de memoria
+**Contexto:** Se asumió que "ningún subagente puede spawnear otros agentes" en Claude Code. Al
+verificar la doc oficial de sub-agents, resultó desactualizado: **desde v2.1.172 un subagente SÍ
+puede spawnear anidado** (foreground, con `Agent` en tools; los background no a profundidad ≥5).
+**Aprendizaje:** Las capacidades de la plataforma cambian entre versiones; decidir arquitectura con
+una premisa de memoria puede llevar a restricciones falsas o a diseños frágiles.
+**Regla para el futuro:** Ante cualquier restricción de plataforma que condicione el diseño,
+**verificar en la documentación actual** (find-docs / WebFetch) antes de fijarla. Cuando el runtime
+sea de versión no controlada, preferir el **diseño robusto a la versión** (p. ej. el modelo plano,
+D-011) aunque la capacidad nueva exista.
