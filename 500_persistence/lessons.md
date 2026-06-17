@@ -13,6 +13,7 @@
 | L-004 | No toda mención a `persistence/` es la carpeta de este repo | Al renombrar/refactorizar, distinguir plano de construcción vs. operación antes de tocar referencias |
 | L-005 | Verificar capacidades de la plataforma en la doc, no de memoria | Ante restricciones de Claude Code, consultar docs actuales (find-docs/WebFetch) antes de fijar arquitectura |
 | L-006 | Los entregables del harness son salidas de runtime | En construcción guardar **moldes** (`*.template`), nunca instancias reales (D-002) |
+| L-007 | Hay dos pares de lecciones/decisiones (construir vs. operar) | No confundir `500_persistence/` con la `knowledge/` del harness; son planos distintos (D-002) |
 
 ---
 
@@ -73,3 +74,15 @@ chocaría con el `.gitignore`.
 (`*.template.*`) de los entregables; las **instancias** se generan en runtime y permanecen en la
 terminal de operación. Antes de crear una carpeta de "salidas", clasificar: ¿molde (construcción) o
 instancia (operación)?
+
+## L-007 — Dos pares de lecciones/decisiones: no confundir construir con operar
+**Contexto:** Al andamiar `knowledge/` surgió que el harness genera, en runtime, sus propios
+`decisions_library.md` y `lessons_learned.md` — homónimos conceptuales de los `decisions.md` /
+`lessons.md` de `500_persistence/`, pero de **otro plano** (D-002).
+**Aprendizaje:** Existen **dos pares** distintos: (1) `500_persistence/decisions.md`+`lessons.md` =
+cómo **construimos** el harness (lo escribe la sesión principal); (2) `knowledge/decisions_library.md`
++`lessons_learned.md` = lo que el harness **aprende al ejecutarse** (lo escriben A y C en runtime).
+Tratarlos como uno solo rompe la trazabilidad y mezcla planos.
+**Regla para el futuro:** Al hablar de "lecciones" o "decisiones", precisar **de qué plano**:
+construcción (`500_persistence/`) u operación (`knowledge/` del harness). Nunca volcar conocimiento de
+runtime en `500_persistence/` ni viceversa.

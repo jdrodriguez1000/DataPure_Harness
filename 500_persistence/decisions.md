@@ -20,7 +20,7 @@
 | D-011 | Modelo de ejecución del harness = **plano** | FIRME | A=sesión principal y único spawner; B planifica; robusto a la versión del runtime |
 | D-012 | Convención de fases de construcción por harness | FIRME | `900_brief/` → `905_design/` → `910_plan/` → `920_build/`; orden del método |
 | D-013 | Cierre de decisiones abiertas del plan (P-1/P-2/P-3) | FIRME | Ubicación `920_build/010_discovery/`; Governor = CLAUDE.md+1 comando; modelos Opus/Sonnet por agente |
-| D-014 | Estructura interna del build del harness 010 | FIRME | `agents/ schemas/ contract/ skills/ deliverables/`; `deliverables/` guarda MOLDES, no instancias |
+| D-014 | Estructura interna del build del harness 010 | FIRME | 7 subcarpetas: `agents/ schemas/ evaluation/ contract/ skills/ deliverables/ knowledge/`; runtime = MOLDES |
 
 ---
 
@@ -142,12 +142,20 @@ estado se crean en runtime (D-002).
 ## D-014 — Estructura interna del build del harness 010
 **Fecha:** 2026-06-16 · **Estado:** FIRME
 **Contexto:** Al andamiar INC-0 el usuario pidió ajustes a la organización de `920_build/010_discovery/`.
-**Decisión:** Subcarpetas: **`agents/`** (subagentes B/workers/C), **`schemas/`** (plantillas de
-estado C-7 y de veredicto/métricas C-9), **`contract/`** (SOLO el Sprint Contract C-8; renombrada
-desde la propuesta `templates/`), **`skills/`** (habilidades reutilizables de los agentes) y
-**`deliverables/`** (plantillas/**moldes** de los 5 entregables principales).
-**Alcance (importante, D-002):** `deliverables/` guarda **moldes** (`*.template.md`), NO las
-instancias reales: esas son salidas de runtime y viven en la terminal de operación (ver L-006). Si en
-el futuro se quisiera que `deliverables/` fuera el destino real de los documentos, habría que revisar
+**Decisión:** **7 subcarpetas** en `920_build/010_discovery/`:
+- **`agents/`** — subagentes B/workers/C.
+- **`schemas/`** — esquemas de **estado** C-7: `harness-state`, `execution-state`, `claude-progress`.
+- **`evaluation/`** — salidas de la Instancia C (C-9): `verdict`, `metrics_summary`. *(Movidas desde
+  `schemas/` para separar estado vivo de salidas de evaluación.)*
+- **`contract/`** — SOLO el Sprint Contract C-8 (renombrada desde la propuesta `templates/`).
+- **`skills/`** — habilidades reutilizables de los agentes.
+- **`deliverables/`** — moldes de los 5 entregables principales.
+- **`knowledge/`** — moldes de `decisions_library.md` y `lessons_learned.md` (base de conocimiento
+  que el harness acumula en runtime).
+
+**Alcance (importante, D-002):** `deliverables/`, `knowledge/` y `evaluation/` guardan **moldes**
+(`*.template.*`), NO instancias reales: esas son salidas de runtime y viven en la terminal de
+operación (ver L-006). No confundir `knowledge/*` con `500_persistence/` (ver L-007). Si en el futuro
+se quisiera que alguna de estas carpetas fuera el destino real de los documentos, habría que revisar
 la separación de planos y el `.gitignore` (decisión pendiente, no tomada).
 **Consecuencias:** Extiende D-012. Patrón reusable para 020–100.

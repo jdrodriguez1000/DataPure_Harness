@@ -15,24 +15,30 @@
 ├── agents/         ← subagentes (se llenan en INC-1+): B, workers, C
 │                     C-2 phase-orchestrator-010, C-3 dialoguer, C-4 analyst,
 │                     C-5 synthesizer, C-6 phase-evaluator-010
-├── schemas/        ← C-7 esquemas de estado + C-9 esquema de veredicto/métricas (PLANTILLAS)
+├── schemas/        ← C-7 esquemas de ESTADO (PLANTILLAS)
 │   ├── harness-state.template.json
 │   ├── execution-state.template.json
-│   ├── claude-progress.template.txt
+│   └── claude-progress.template.txt
+├── evaluation/     ← C-9 salidas de la Instancia C: veredicto + métricas (moldes)
 │   ├── verdict.template.json
 │   └── metrics_summary.template.json
 ├── contract/       ← C-8: SOLO el Sprint Contract (se materializa en INC-1)
 ├── skills/         ← habilidades (skills) reutilizables de los agentes (INC-1+)
-└── deliverables/   ← plantillas de los 5 entregables principales del harness (moldes)
-    ├── shared_understanding.template.md
-    ├── scope_boundaries.template.md
-    ├── domain_glossary.template.md
-    ├── failure_behavior.template.md
-    └── product_brief_validated.template.md
+├── deliverables/   ← plantillas de los 5 entregables principales del harness (moldes)
+│   ├── shared_understanding.template.md
+│   ├── scope_boundaries.template.md
+│   ├── domain_glossary.template.md
+│   ├── failure_behavior.template.md
+│   └── product_brief_validated.template.md
+└── knowledge/      ← moldes de la base de conocimiento del harness (runtime)
+    ├── decisions_library.template.md
+    └── lessons_learned.template.md
 ```
 
-> **Nota de planos (D-002):** `deliverables/` contiene **moldes** (construcción). Las instancias
-> reales de los 5 artefactos las produce el synthesizer en runtime (operación) y no vuelven al repo.
+> **Nota de planos (D-002):** `deliverables/` y `knowledge/` contienen **moldes** (construcción). Las
+> instancias reales se producen en runtime (operación) y no vuelven al repo. **No confundir** el par
+> `knowledge/*` (lo que el harness aprende al ejecutarse) con `500_persistence/decisions.md` +
+> `lessons.md` (cómo construimos el harness).
 
 ## Estado de construcción (incrementos del plan §5)
 
@@ -54,4 +60,5 @@
 ## Despliegue (futuro)
 
 El despliegue a la terminal de operación copia `agents/*` al `.claude/agents/` de esa terminal y
-usa las plantillas de `schemas/` para inicializar las **instancias** de estado en runtime.
+usa las plantillas de `schemas/` (estado) y `evaluation/` (veredicto/métricas) para inicializar las
+**instancias** en runtime.
