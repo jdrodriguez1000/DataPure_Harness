@@ -150,6 +150,12 @@ skeleton end-to-end).
 - **L-007:** existen **dos pares** de lecciones/decisiones — `500_persistence/` (construir) vs.
   `knowledge/*` del harness (operar). No confundirlos (D-002).
 
+**Flujo de despliegue discutido (→ T-011):** se mapeó el flujo previo de **3 comandos**
+(install/init/discovery) a la estructura del build: `install` copia infra (`agents/ skills/ contract/`
++ C-1), `init` instancia moldes de `schemas/ knowledge/ evaluation/`, `discovery` (Governor) ejecuta.
+La partición de las 7 subcarpetas mapea 1:1. Se **difiere a después de INC-5** (E4/E9) para no
+construir el instalador antes de que corra el esqueleto; irá en `920_build/010_discovery/deploy/`.
+
 **Dónde quedamos:** INC-0 completo (estructura del build estabilizada). La próxima es **INC-1**
 (T-010 sigue EN CURSO): materializar el Sprint Contract en `contract/` y construir el walking
 skeleton end-to-end.

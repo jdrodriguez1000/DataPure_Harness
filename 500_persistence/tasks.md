@@ -16,6 +16,7 @@
 | T-005 | HECHA | Decidir la **meta del proyecto** → construir el harness 010 (brief→diseño→plan→construir) |
 | T-009 | HECHA | Ciclo de definición del harness 010: brief + diseño + plan (los 3 APROBADOS) |
 | T-010 | EN CURSO | **Construir el harness 010**: INC-0 HECHO (andamiaje + P-1/P-2/P-3); sigue INC-1 (walking skeleton) |
+| T-011 | PRÓXIMA | **Flujo de despliegue** (3 comandos install/init/discovery) → `deploy/`; construir tras INC-5 |
 | T-006 | PRÓXIMA | Reconciliar nombres/numeración de harnesses (statement §9 ↔ `700_harnesses/`) y mapear el 100 a capas |
 
 ---
@@ -68,6 +69,23 @@ Ejecutar `910_plan/010_discovery.md`.
 - **INC-1 — PRÓXIMO:** materializar el Sprint Contract en `contract/` (C-8, base en diseño §9) y
   construir el walking skeleton end-to-end (A→B→1 worker→C produce `shared_understanding.md` +
   `verdict.json`, con el gate humano) para validar el modelo plano antes de ensanchar.
+
+## T-011 — Flujo de despliegue del harness 010 (construcción → operación) — PRÓXIMA
+Materializa el **criterio Done #6 del plan** ("procedimiento de despliegue"). Flujo de **3 comandos**
+que copian/instancian desde `920_build/010_discovery/` hacia una terminal de operación nueva:
+1. **`install.ps1`** — infra: copia `agents/`, `skills/`, `contract/` y C-1 (CLAUDE.md del harness +
+   comando) a `.claude/*`; crea `input/brief.md` (= semilla `800_documents/statement.md`).
+2. **`init.ps1`** — estado: instancia los moldes de `schemas/`, `knowledge/`, `evaluation/` como
+   archivos vacíos válidos (`harness-state.json`, `execution-state.json`, `claude-progress.txt`,
+   `/knowledge/*`, `/eval/*`) — convierte molde→instancia quitando `.template`.
+3. **`discovery`** (comando Governor, C-1) — prepara discovery (moldes de `deliverables/`) e **inicia**
+   la ejecución A→B→workers→C, produciendo `/010_discovery/*`.
+**Dónde vive:** carpeta nueva `920_build/010_discovery/deploy/` (`install.ps1`, `init.ps1`, `DEPLOY.md`)
+— plano de construcción; su efecto es el plano de operación (D-002).
+**Cuándo:** **después de INC-5** (E4/E9 — no construir el instalador antes de que el esqueleto corra;
+si no, se reharía al cambiar agentes/esquemas en INC-1…INC-5).
+**Nota:** elimina la redundancia del flujo previo (agentes solo en `install`, no recopiados en
+`discovery`).
 
 ## T-006 — Reconciliar harnesses — PRÓXIMA
 Alinear nombres y numeración entre `800_documents/statement.md` §9 y `700_harnesses/`; decidir cómo
