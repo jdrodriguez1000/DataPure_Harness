@@ -23,6 +23,7 @@
 | D-014 | Estructura interna del build del harness 010 | FIRME | 7 subcarpetas: `agents/ schemas/ evaluation/ contract/ skills/ deliverables/ knowledge/`; runtime = MOLDES |
 | D-015 | Backlog de ideas (`backlog.md`) + comando `/pure-idea` | FIRME | 5º archivo de persistencia para ideas sin compromiso; descartadas no se borran |
 | D-016 | Cómo se cablea la entrevista humano↔dialoguer en el modelo plano | PENDIENTE | El dialoguer posee el guión/transcript, pero la charla en vivo la opera A; resolver en INC-1 |
+| D-017 | Governor = sesión principal (no subagente); sus comandos se construyen como Skills | FIRME | C-1 = CLAUDE.md del harness + `skills/*/SKILL.md`; subagentes solo B/workers/C |
 
 ---
 
@@ -193,3 +194,16 @@ en tiempo real es **A (Governor)**.
 **Por qué pendiente:** Se resuelve al construir el **walking skeleton de INC-1**, que debe ejercitar
 la interacción humano↔dialoguer y validar empíricamente cuál opción sostiene el modelo plano.
 **Consecuencias:** Condiciona el cableado de C-1 (A) y C-3 (dialoguer) y los checkpoints CP-01a/CP-01.
+
+## D-017 — Governor = sesión principal (no subagente); sus comandos se construyen como Skills
+**Fecha:** 2026-06-17 · **Estado:** FIRME
+**Contexto:** Al construir C-1 se pidió "crear el agente Governor" siguiendo la doc oficial de
+subagentes. Pero el Governor (A) es, por D-011/D-013, la **sesión principal** y único spawner — no un
+subagente. Además la doc oficial de skills indica que "custom commands have been merged into skills".
+**Decisión:** C-1 se materializa como (1) `920_build/010_discovery/CLAUDE.md` (instrucciones del hilo
+principal) + (2) skills `skills/harness-start/SKILL.md` y `skills/harness-continue/SKILL.md` (con
+`disable-model-invocation: true` y `allowed-tools: Read, Write, Edit, Bash, Agent`). Los **subagentes**
+(`.claude/agents/*.md`) se reservan para B (`phase-orchestrator-010`), los workers (dialoguer/analyst/
+synthesizer) y C (`phase-evaluator-010`). La doc de sub-agents aplica a esos, no al Governor.
+**Consecuencias:** Coherente con D-011/D-013 y con el patrón de skills recomendado (ver L-009). El
+instalador (T-011) copia `CLAUDE.md` a la raíz de operación y `skills/` a `.claude/skills/`.

@@ -15,6 +15,7 @@
 | L-006 | Los entregables del harness son salidas de runtime | En construcción guardar **moldes** (`*.template`), nunca instancias reales (D-002) |
 | L-007 | Hay dos pares de lecciones/decisiones (construir vs. operar) | No confundir `500_persistence/` con la `knowledge/` del harness; son planos distintos (D-002) |
 | L-008 | Dos terminales sobre la misma carpeta pueden pisarse al escribir | Serializar escrituras de `500_persistence/` (1 sola a la vez, `git pull`/re-leer antes) o usar un git worktree |
+| L-009 | En Claude Code los comandos se fusionaron en skills | `commands/x.md` ≡ `skills/x/SKILL.md`; preferir Skills (frontmatter, archivos de apoyo, invocación controlada) |
 
 ---
 
@@ -99,3 +100,16 @@ lecturas/experimentos en paralelo no son problema; el riesgo es la escritura con
 (serializar; hacer `git pull`/re-leer antes de escribir). Para trabajo paralelo real, usar un **git
 worktree** (otra carpeta, misma historia) y luego mergear. Comandos que escriben (como `/pure-idea`)
 deben releer el archivo antes de escribir y commitear de forma acotada (D-015).
+
+## L-009 — En Claude Code los comandos se fusionaron en skills
+**Contexto:** Al construir los "comandos" del Governor (`harness-start`/`harness-continue`) se
+verificó en la doc oficial de skills.
+**Aprendizaje:** "Custom commands have been merged into skills": un `.claude/commands/x.md` y un
+`.claude/skills/x/SKILL.md` crean el mismo `/x` y funcionan igual. Los `commands/` siguen vigentes,
+pero los **Skills** añaden frontmatter (incl. `disable-model-invocation`, `allowed-tools`), un
+directorio para archivos de apoyo y carga automática cuando son relevantes. Un Skill es una carpeta
+con `SKILL.md` como entrypoint.
+**Regla para el futuro:** Para nuevas habilidades de agentes del harness, preferir **Skills**
+(`SKILL.md`) sobre `commands/*.md`. Usar `disable-model-invocation: true` para las que dispara el
+humano y `allowed-tools` para preaprobar herramientas (p. ej. `Agent` en skills del Governor que
+spawnean). Verificar capacidades en la doc oficial antes de fijar formato (ver L-005).

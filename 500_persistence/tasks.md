@@ -16,7 +16,7 @@
 | T-005 | HECHA | Decidir la **meta del proyecto** → construir el harness 010 (brief→diseño→plan→construir) |
 | T-009 | HECHA | Ciclo de definición del harness 010: brief + diseño + plan (los 3 APROBADOS) |
 | T-012 | HECHA | Backlog de ideas (`backlog.md`) + comando `/pure-idea` para capturarlas |
-| T-010 | EN CURSO | **Construir el harness 010**: INC-0 HECHO; INC-1 C-8 HECHO; falta skeleton (C-1/C-2/C-3/C-5/C-6) |
+| T-010 | EN CURSO | **Construir el harness 010**: INC-0 HECHO; INC-1 C-8 + C-1 HECHOS; falta cadena (C-2/C-3/C-5/C-6) |
 | T-011 | PRÓXIMA | **Flujo de despliegue** (3 comandos install/init/discovery) → `deploy/`; construir tras INC-5 |
 | T-006 | PRÓXIMA | Reconciliar nombres/numeración de harnesses (statement §9 ↔ `700_harnesses/`) y mapear el 100 a capas |
 
@@ -71,9 +71,12 @@ Ejecutar `910_plan/010_discovery.md`.
   - **C-8 HECHO (S-007):** Sprint Contract materializado en `contract/sprint_contract.template.md`
     (molde, base diseño §9; con `Instancias:` A/B/C y bloque de gate P5). Abre **D-016 PENDIENTE**
     (cableado de la entrevista humano↔dialoguer en el modelo plano).
-  - **Falta el walking skeleton:** C-1 (A), C-2 (B), C-3 (dialoguer), C-5 (synthesizer), C-6 (C) →
-    producir `shared_understanding.md` + `verdict.json` con el gate humano. Valida el modelo plano y
-    resuelve D-016 en la práctica.
+  - **C-1 HECHO (S-008):** Governor = `920_build/010_discovery/CLAUDE.md` + skills `harness-start` /
+    `harness-continue` (no es subagente, D-017; comandos = `SKILL.md`, doc oficial).
+  - **Falta la cadena de subagentes:** C-2 (B `phase-orchestrator-010`), C-3 (`discovery-dialoguer`),
+    C-5 (`discovery-synthesizer`), C-6 (C `phase-evaluator-010`) — como `.claude/agents/*.md` →
+    producir `shared_understanding.md` + `verdict.json` con el gate. Valida el modelo plano y resuelve
+    D-016 en la práctica.
 
 ## T-011 — Flujo de despliegue del harness 010 (construcción → operación) — PRÓXIMA
 Materializa el **criterio Done #6 del plan** ("procedimiento de despliegue"). Flujo de **3 comandos**

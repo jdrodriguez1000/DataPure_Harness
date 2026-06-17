@@ -28,13 +28,14 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
 - **Backlog de ideas (D-015):** nuevo `500_persistence/backlog.md` para ideas sin compromiso
   (estados `No implementada`/`Implementada`/`Descartada`; las descartadas NO se borran) + comando
   `/pure-idea` para capturarlas en cualquier momento. Primera idea: **I-001 cerebro global**.
-- **INC-1 en curso (T-010):** **C-8 HECHO** — Sprint Contract materializado en
-  `contract/sprint_contract.template.md` (molde, base diseño §9, con línea `Instancias:` A/B/C y
-  bloque de gate P5). **Pendiente D-016:** cómo se cablea la entrevista humano↔dialoguer en el
-  modelo plano (se resuelve al construir el skeleton).
-- **Próximo paso (T-010 → INC-1):** construir el walking skeleton end-to-end (C-1 A, C-2 B,
-  C-3 dialoguer, C-5 synthesizer, C-6 C) → produce `shared_understanding.md` + `verdict.json` con el
-  gate humano.
+- **INC-1 en curso (T-010):** **C-8 HECHO** (Sprint Contract en `contract/`) y **C-1 HECHO** — el
+  **Governor** construido como `920_build/010_discovery/CLAUDE.md` + skills `harness-start` /
+  `harness-continue` (D-017: comandos = skills `SKILL.md`). **Pendiente D-016** (entrevista
+  humano↔dialoguer, se resuelve al construir el dialoguer).
+- **Próximo paso (T-010 → INC-1):** construir los **subagentes** de la cadena (estos sí como
+  `.claude/agents/*.md`, doc oficial): C-2 B `phase-orchestrator-010`, C-3 `discovery-dialoguer`,
+  C-5 `discovery-synthesizer`, C-6 C `phase-evaluator-010` → producir `shared_understanding.md` +
+  `verdict.json` con el gate humano.
 
 ## Índice de sesiones / hitos
 
@@ -47,6 +48,7 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
 | S-005 | 2026-06-16 | INC-0: andamiaje del harness 010 + cierre P-1/P-2/P-3 | `920_build/010_discovery/` con 7 subcarpetas (schemas/evaluation/contract/skills/deliverables/knowledge/agents); D-013, D-014; L-006, L-007 |
 | S-006 | 2026-06-17 | Backlog de ideas + comando `/pure-idea` + idea cerebro global | Nuevo `backlog.md` (5º archivo de persistencia) y `/pure-idea`; I-001 cerebro global; D-015; L-008 (concurrencia 2 terminales) |
 | S-007 | 2026-06-17 | INC-1 paso 1: Sprint Contract (C-8) materializado | `contract/sprint_contract.template.md` (molde + `Instancias:` A/B/C + gate P5); D-016 PENDIENTE (entrevista humano↔dialoguer) |
+| S-008 | 2026-06-17 | INC-1 paso 2: Governor (C-1) construido | `CLAUDE.md` del harness + skills `harness-start`/`harness-continue` (doc oficial sub-agents/skills); D-017; L-009 |
 
 ---
 
@@ -219,3 +221,29 @@ en el modelo plano (A media vs. el dialoguer pregunta en vivo). Se resuelve al c
 
 **Dónde quedamos:** INC-1 paso 1 completo (C-8). Falta el grueso de INC-1: el **walking skeleton**
 (C-1, C-2, C-3, C-5, C-6) que produce `shared_understanding.md` + `verdict.json` con el gate.
+
+---
+
+## S-008 — 2026-06-17 — INC-1 (paso 2): Governor (C-1) construido
+
+**Qué se hizo:**
+- Se consultó la **documentación oficial de Claude Code** (sub-agents y skills) que pidió el usuario.
+- Se construyó el **Governor (C-1)** en tres archivos dentro de `920_build/010_discovery/`:
+  - `CLAUDE.md` — instrucciones del **hilo principal** (A): patrón de 3 instancias, estado/persistencia,
+    gate P5, checkpoints CP-01a…CP-04, flujo §12, escalamiento P6, scaffold C-10.
+  - `skills/harness-start/SKILL.md` — ritual E10-A (arranque: scaffold, inputs, contrato+gate, cadena
+    B→workers→C).
+  - `skills/harness-continue/SKILL.md` — ritual E10-B (reanudar desde el último checkpoint).
+- Skills con `disable-model-invocation: true` (los dispara el humano) y `allowed-tools: Read, Write,
+  Edit, Bash, Agent` (A necesita `Agent` para spawnear). Se marcó el **alcance INC-1** (analyst C-4
+  llega en INC-2). Se quitó el `.gitkeep` de `skills/`.
+
+**Hallazgos / decisiones:**
+- **D-017 (FIRME):** el Governor **no es subagente** (es la sesión principal, D-011) y sus comandos
+  se construyen como **Skills** (`SKILL.md`), no como `.claude/commands/*.md`.
+- **L-009:** la doc oficial confirma que "custom commands have been merged into skills" (un
+  `/x` por `commands/x.md` o por `skills/x/SKILL.md` es equivalente; los skills son lo recomendado).
+- El `harness-start` deja explícito que **D-016** se resuelve al construir el dialoguer.
+
+**Dónde quedamos:** C-1 y C-8 hechos. Falta la **cadena de subagentes** del skeleton (C-2 B, C-3
+dialoguer, C-5 synthesizer, C-6 C) — esos sí como `.claude/agents/*.md` por la doc oficial.
