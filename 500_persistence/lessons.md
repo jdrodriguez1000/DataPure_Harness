@@ -14,6 +14,7 @@
 | L-005 | Verificar capacidades de la plataforma en la doc, no de memoria | Ante restricciones de Claude Code, consultar docs actuales (find-docs/WebFetch) antes de fijar arquitectura |
 | L-006 | Los entregables del harness son salidas de runtime | En construcción guardar **moldes** (`*.template`), nunca instancias reales (D-002) |
 | L-007 | Hay dos pares de lecciones/decisiones (construir vs. operar) | No confundir `500_persistence/` con la `knowledge/` del harness; son planos distintos (D-002) |
+| L-008 | Dos terminales sobre la misma carpeta pueden pisarse al escribir | Serializar escrituras de `500_persistence/` (1 sola a la vez, `git pull`/re-leer antes) o usar un git worktree |
 
 ---
 
@@ -86,3 +87,15 @@ Tratarlos como uno solo rompe la trazabilidad y mezcla planos.
 **Regla para el futuro:** Al hablar de "lecciones" o "decisiones", precisar **de qué plano**:
 construcción (`500_persistence/`) u operación (`knowledge/` del harness). Nunca volcar conocimiento de
 runtime en `500_persistence/` ni viceversa.
+
+## L-008 — Dos terminales sobre la misma carpeta pueden pisarse al escribir
+**Contexto:** Se preguntó si se puede construir el harness en una terminal y desarrollar/registrar
+una idea en otra terminal apuntando a la misma carpeta.
+**Aprendizaje:** Sí se puede abrir más de una sesión sobre el mismo directorio, pero **no hay
+bloqueo** de archivos: si dos sesiones escriben `500_persistence/` a la vez, la última en guardar
+pisa a la otra y puede provocar conflictos de git. Esto choca con el single-writer (D-003). Las
+lecturas/experimentos en paralelo no son problema; el riesgo es la escritura concurrente.
+**Regla para el futuro:** Mantener una sola terminal escribiendo `500_persistence/` a la vez
+(serializar; hacer `git pull`/re-leer antes de escribir). Para trabajo paralelo real, usar un **git
+worktree** (otra carpeta, misma historia) y luego mergear. Comandos que escriben (como `/pure-idea`)
+deben releer el archivo antes de escribir y commitear de forma acotada (D-015).

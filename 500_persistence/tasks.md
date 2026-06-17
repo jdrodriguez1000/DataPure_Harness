@@ -15,6 +15,7 @@
 | T-007 | HECHA | Git/GitHub (init `main` + remote + autopush en `/pure-progress`) |
 | T-005 | HECHA | Decidir la **meta del proyecto** → construir el harness 010 (brief→diseño→plan→construir) |
 | T-009 | HECHA | Ciclo de definición del harness 010: brief + diseño + plan (los 3 APROBADOS) |
+| T-012 | HECHA | Backlog de ideas (`backlog.md`) + comando `/pure-idea` para capturarlas |
 | T-010 | EN CURSO | **Construir el harness 010**: INC-0 HECHO (andamiaje + P-1/P-2/P-3); sigue INC-1 (walking skeleton) |
 | T-011 | PRÓXIMA | **Flujo de despliegue** (3 comandos install/init/discovery) → `deploy/`; construir tras INC-5 |
 | T-006 | PRÓXIMA | Reconciliar nombres/numeración de harnesses (statement §9 ↔ `700_harnesses/`) y mapear el 100 a capas |
@@ -90,3 +91,11 @@ si no, se reharía al cambiar agentes/esquemas en INC-1…INC-5).
 ## T-006 — Reconciliar harnesses — PRÓXIMA
 Alinear nombres y numeración entre `800_documents/statement.md` §9 y `700_harnesses/`; decidir cómo
 encaja `100_change_harness` en las dos capas de la metodología.
+
+## T-012 — Backlog de ideas + comando `/pure-idea` — HECHA
+Se creó `500_persistence/backlog.md` (5º archivo de persistencia) para ideas sin compromiso, con
+estados `No implementada`/`Implementada`/`Descartada` (las descartadas no se borran). Y el comando
+de proyecto `/pure-idea` (`.claude/commands/pure-idea.md`) para capturarlas en cualquier momento sin
+disparar el cierre completo (relee el archivo antes de escribir y commitea acotado, robusto a una 2ª
+terminal). Decisión en D-015; primera idea registrada: I-001 (cerebro global). Detalle en
+`progress.md` → S-006.

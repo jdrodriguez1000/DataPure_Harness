@@ -21,6 +21,7 @@
 | D-012 | Convención de fases de construcción por harness | FIRME | `900_brief/` → `905_design/` → `910_plan/` → `920_build/`; orden del método |
 | D-013 | Cierre de decisiones abiertas del plan (P-1/P-2/P-3) | FIRME | Ubicación `920_build/010_discovery/`; Governor = CLAUDE.md+1 comando; modelos Opus/Sonnet por agente |
 | D-014 | Estructura interna del build del harness 010 | FIRME | 7 subcarpetas: `agents/ schemas/ evaluation/ contract/ skills/ deliverables/ knowledge/`; runtime = MOLDES |
+| D-015 | Backlog de ideas (`backlog.md`) + comando `/pure-idea` | FIRME | 5º archivo de persistencia para ideas sin compromiso; descartadas no se borran |
 
 ---
 
@@ -159,3 +160,18 @@ operación (ver L-006). No confundir `knowledge/*` con `500_persistence/` (ver L
 se quisiera que alguna de estas carpetas fuera el destino real de los documentos, habría que revisar
 la separación de planos y el `.gitignore` (decisión pendiente, no tomada).
 **Consecuencias:** Extiende D-012. Patrón reusable para 020–100.
+
+## D-015 — Backlog de ideas (`backlog.md`) + comando `/pure-idea`
+**Fecha:** 2026-06-17 · **Estado:** FIRME
+**Contexto:** Surgen ideas que tal vez se construyan o tal vez no; mezclarlas en `tasks.md` (trabajo
+comprometido) confunde el tablero, y esperar al cierre `/pure-progress` para anotarlas hace perder
+ideas que aparecen a mitad de sesión.
+**Decisión:** Quinto archivo de persistencia `500_persistence/backlog.md` para ideas sin compromiso,
+con índice por ID `I-xxx` y estados `No implementada` (por defecto) · `Implementada` · `Descartada`.
+Las **descartadas no se borran** (el futuro cambia y podrían reactivarse). Se añade el comando de
+proyecto `/pure-idea` (`.claude/commands/pure-idea.md`) que captura ideas en cualquier momento sin
+disparar el cierre completo: relee `backlog.md` antes de escribir (no asume el último ID de memoria)
+y hace un commit **acotado solo a ese archivo** para ser robusto a una segunda terminal (ver L-008).
+Mover estados sigue siendo parte de `/pure-progress` al cierre.
+**Consecuencias:** El protocolo de sesión (CLAUDE.md) ahora tiene 5 archivos de persistencia, no 4
+(pendiente reflejarlo en CLAUDE.md si se desea formalizar). El single-writer (D-003) sigue vigente.

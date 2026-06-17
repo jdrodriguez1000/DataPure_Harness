@@ -25,6 +25,9 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
   Sprint Contract), `skills/` (habilidades), `deliverables/` (moldes de los 5 entregables) y
   `knowledge/` (moldes de `decisions_library`/`lessons_learned` del harness en runtime). Todo lo de
   runtime se guarda como **moldes** (L-006); no confundir `knowledge/*` con `500_persistence/` (L-007).
+- **Backlog de ideas (D-015):** nuevo `500_persistence/backlog.md` para ideas sin compromiso
+  (estados `No implementada`/`Implementada`/`Descartada`; las descartadas NO se borran) + comando
+  `/pure-idea` para capturarlas en cualquier momento. Primera idea: **I-001 cerebro global**.
 - **Próximo paso (T-010 → INC-1):** materializar el Sprint Contract en `contract/` y construir el
   walking skeleton end-to-end (A→B→1 worker→C produce `shared_understanding.md` + `verdict.json`).
 
@@ -37,6 +40,7 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
 | S-003 | 2026-06-16 | Renombrado de carpetas con prefijo numérico | `500_persistence/`, `700_harnesses/`, `800_documents/`, `810_inputs/` + todas las referencias |
 | S-004 | 2026-06-16 | Git/GitHub + meta decidida + brief/diseño/plan del 010 | Repo enlazado y autopush; D-007 resuelta; 3 docs del 010 aprobados; modelo de ejecución plano |
 | S-005 | 2026-06-16 | INC-0: andamiaje del harness 010 + cierre P-1/P-2/P-3 | `920_build/010_discovery/` con 7 subcarpetas (schemas/evaluation/contract/skills/deliverables/knowledge/agents); D-013, D-014; L-006, L-007 |
+| S-006 | 2026-06-17 | Backlog de ideas + comando `/pure-idea` + idea cerebro global | Nuevo `backlog.md` (5º archivo de persistencia) y `/pure-idea`; I-001 cerebro global; D-015; L-008 (concurrencia 2 terminales) |
 
 ---
 
@@ -159,3 +163,31 @@ construir el instalador antes de que corra el esqueleto; irá en `920_build/010_
 **Dónde quedamos:** INC-0 completo (estructura del build estabilizada). La próxima es **INC-1**
 (T-010 sigue EN CURSO): materializar el Sprint Contract en `contract/` y construir el walking
 skeleton end-to-end.
+
+---
+
+## S-006 — 2026-06-17 — Backlog de ideas, comando `/pure-idea` e idea del cerebro global
+
+**Qué se hizo:**
+- **Conversación de arquitectura sobre un "cerebro global"** (memoria cross-project): subir el
+  aprendizaje transferible (`lessons.md`/`decisions.md`) de cada proyecto a una BD y consultarlo
+  desde cualquier proyecto. Se aclaró: BD ≠ "leíble" por el agente (necesita puente: comando hoy,
+  MCP mañana); el valor está en **recuperar en el momento correcto** (inicio de sesión / ante una
+  decisión); distinguir aprendizaje **transferible** vs. **específico** (etiqueta de alcance);
+  `brain.db` en SQLite **fuera del repo** (`~/.claude/`) y comando `/cerebro` a **nivel usuario**
+  para que sea global. Se registró como **I-001** en el nuevo backlog (no se construye ahora).
+- **Nuevo archivo de persistencia `500_persistence/backlog.md`** (5º archivo): ideas sin compromiso,
+  con estados `No implementada`/`Implementada`/`Descartada` (las descartadas **no se borran**).
+  Diferencia con `tasks.md`: aquí no hay certeza de que se construyan (D-015).
+- **Nuevo comando `/pure-idea`** (`.claude/commands/pure-idea.md`, ámbito proyecto): captura ideas
+  en cualquier momento sin disparar el cierre completo; relee `backlog.md` antes de escribir y hace
+  un commit **acotado** solo a ese archivo (robusto a una segunda terminal).
+
+**Hallazgo clave (L-008):** Se puede trabajar con **dos terminales sobre la misma carpeta**, pero
+escribir `500_persistence/` en paralelo rompe el single-writer (D-003): sin bloqueo, la última
+escritura pisa a la otra y puede generar conflictos de git. Mitigación: serializar escrituras (solo
+una terminal escribe a la vez, `git pull`/re-leer antes) o usar un git worktree para trabajo
+paralelo real.
+
+**Dónde quedamos:** Tooling de persistencia ampliado (backlog + `/pure-idea`). T-010 (INC-1) sigue
+siendo la próxima tarea de construcción del harness, sin cambios.
