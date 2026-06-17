@@ -32,6 +32,9 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
   **Governor** construido como `920_build/010_discovery/CLAUDE.md` + skills `harness-start` /
   `harness-continue` (D-017: comandos = skills `SKILL.md`). **Pendiente D-016** (entrevista
   humano↔dialoguer, se resuelve al construir el dialoguer).
+- **Escalado a las 10 fases (D-018):** el Governor (A) es **único y genérico**; lo construido para el
+  010 es 010-específico a propósito (slice, D-007). Por fase cambia solo el **"paquete de fase"**
+  (agentes + contrato + rúbrica + entregables); las skills se generalizan **al construir el 020**.
 - **Próximo paso (T-010 → INC-1):** construir los **subagentes** de la cadena (estos sí como
   `.claude/agents/*.md`, doc oficial): C-2 B `phase-orchestrator-010`, C-3 `discovery-dialoguer`,
   C-5 `discovery-synthesizer`, C-6 C `phase-evaluator-010` → producir `shared_understanding.md` +
@@ -49,6 +52,7 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
 | S-006 | 2026-06-17 | Backlog de ideas + comando `/pure-idea` + idea cerebro global | Nuevo `backlog.md` (5º archivo de persistencia) y `/pure-idea`; I-001 cerebro global; D-015; L-008 (concurrencia 2 terminales) |
 | S-007 | 2026-06-17 | INC-1 paso 1: Sprint Contract (C-8) materializado | `contract/sprint_contract.template.md` (molde + `Instancias:` A/B/C + gate P5); D-016 PENDIENTE (entrevista humano↔dialoguer) |
 | S-008 | 2026-06-17 | INC-1 paso 2: Governor (C-1) construido | `CLAUDE.md` del harness + skills `harness-start`/`harness-continue` (doc oficial sub-agents/skills); D-017; L-009 |
+| S-009 | 2026-06-17 | Decisión: Governor genérico + paquete de fase | D-018 (A único para las 10 fases; por fase cambia el paquete; generalizar al 020) |
 
 ---
 
@@ -247,3 +251,19 @@ en el modelo plano (A media vs. el dialoguer pregunta en vivo). Se resuelve al c
 
 **Dónde quedamos:** C-1 y C-8 hechos. Falta la **cadena de subagentes** del skeleton (C-2 B, C-3
 dialoguer, C-5 synthesizer, C-6 C) — esos sí como `.claude/agents/*.md` por la doc oficial.
+
+---
+
+## S-009 — 2026-06-17 — Decisión: Governor genérico + paquete de fase (D-018)
+
+**Qué se hizo:** Conversación de arquitectura sobre la reutilización del Governor en otras fases
+(p. ej. 020 Specification). Se registró como decisión (a pedido del usuario).
+
+**Decisión registrada (D-018, FIRME):** el rol **A (Governor) es único y genérico** para las 10
+fases (misma sesión, un `harness-state.json` global, D-006). NO se crea un Governor por fase; lo que
+cambia es el **"paquete de fase"** (subagentes `phase-*-0X0`, Sprint Contract, rúbrica, plantillas de
+entregables). Las skills `harness-start`/`harness-continue` deben volverse **parametrizadas por
+fase**. Lo construido para el 010 es 010-específico a propósito (vertical slice, D-007); la
+**generalización** (extraer lo genérico) se hace **al construir el 020**, no ahora.
+
+**Dónde quedamos:** Sin cambios en la construcción; INC-1 sigue igual (falta la cadena de subagentes).

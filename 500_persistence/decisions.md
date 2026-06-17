@@ -24,6 +24,7 @@
 | D-015 | Backlog de ideas (`backlog.md`) + comando `/pure-idea` | FIRME | 5º archivo de persistencia para ideas sin compromiso; descartadas no se borran |
 | D-016 | Cómo se cablea la entrevista humano↔dialoguer en el modelo plano | PENDIENTE | El dialoguer posee el guión/transcript, pero la charla en vivo la opera A; resolver en INC-1 |
 | D-017 | Governor = sesión principal (no subagente); sus comandos se construyen como Skills | FIRME | C-1 = CLAUDE.md del harness + `skills/*/SKILL.md`; subagentes solo B/workers/C |
+| D-018 | Un Governor genérico para las 10 fases + un "paquete de fase" por harness | FIRME | A es la misma sesión (un `harness-state` global, D-006); por fase cambian agentes/contrato/rúbrica/entregables. Generalizar al construir el 020 |
 
 ---
 
@@ -207,3 +208,20 @@ principal) + (2) skills `skills/harness-start/SKILL.md` y `skills/harness-contin
 synthesizer) y C (`phase-evaluator-010`). La doc de sub-agents aplica a esos, no al Governor.
 **Consecuencias:** Coherente con D-011/D-013 y con el patrón de skills recomendado (ver L-009). El
 instalador (T-011) copia `CLAUDE.md` a la raíz de operación y `skills/` a `.claude/skills/`.
+
+## D-018 — Un Governor genérico para las 10 fases + un "paquete de fase" por harness
+**Fecha:** 2026-06-17 · **Estado:** FIRME
+**Contexto:** Se preguntó si el Governor construido para el 010 se reutiliza en otras fases (p. ej.
+020 Specification) y si hay que crearle habilidades por fase.
+**Decisión:** El **rol A (Governor) es invariante** y la **misma sesión principal** gobierna las 10
+fases encadenadas (coherente con D-006: un solo `harness-state.json` global). NO se crea un Governor
+nuevo por fase. Lo que cambia por fase es un **"paquete de fase"**: sus subagentes
+(`phase-orchestrator-0X0`, workers, `phase-evaluator-0X0`), su Sprint Contract, su rúbrica y sus
+plantillas de entregables. Las skills genéricas `harness-start` / `harness-continue` deben volverse
+**parametrizadas por fase** (mismos rituales E10-A/B; invocan los agentes/artefactos de la fase
+activa).
+**Alcance temporal (D-007):** lo construido hoy para el 010 es **010-específico a propósito** (vertical
+slice). La factorización "Governor genérico + paquete de fase" es un **paso de generalización
+posterior**, a ejecutar **al construir el 020**, no ahora.
+**Consecuencias:** Para el 020 se construye solo su paquete de fase (no un Governor). Implica una tarea
+futura de refactor: extraer lo genérico del `CLAUDE.md`/skills del 010 cuando arranque el 020.
