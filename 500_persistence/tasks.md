@@ -16,7 +16,7 @@
 | T-005 | HECHA | Decidir la **meta del proyecto** → construir el harness 010 (brief→diseño→plan→construir) |
 | T-009 | HECHA | Ciclo de definición del harness 010: brief + diseño + plan (los 3 APROBADOS) |
 | T-012 | HECHA | Backlog de ideas (`backlog.md`) + comando `/pure-idea` para capturarlas |
-| T-010 | EN CURSO | **Construir el harness 010**: INC-0 HECHO (andamiaje + P-1/P-2/P-3); sigue INC-1 (walking skeleton) |
+| T-010 | EN CURSO | **Construir el harness 010**: INC-0 HECHO; INC-1 C-8 HECHO; falta skeleton (C-1/C-2/C-3/C-5/C-6) |
 | T-011 | PRÓXIMA | **Flujo de despliegue** (3 comandos install/init/discovery) → `deploy/`; construir tras INC-5 |
 | T-006 | PRÓXIMA | Reconciliar nombres/numeración de harnesses (statement §9 ↔ `700_harnesses/`) y mapear el 100 a capas |
 
@@ -67,9 +67,13 @@ Ejecutar `910_plan/010_discovery.md`.
 - **INC-0 — HECHO (S-005):** andamiaje `920_build/010_discovery/` creado (agents/, schemas/,
   contract/, skills/, deliverables/) con esquemas C-7/C-9 plantilla y los 5 moldes de entregables.
   P-1/P-2/P-3 cerradas en D-013; estructura interna fijada en D-014.
-- **INC-1 — PRÓXIMO:** materializar el Sprint Contract en `contract/` (C-8, base en diseño §9) y
-  construir el walking skeleton end-to-end (A→B→1 worker→C produce `shared_understanding.md` +
-  `verdict.json`, con el gate humano) para validar el modelo plano antes de ensanchar.
+- **INC-1 — EN CURSO:**
+  - **C-8 HECHO (S-007):** Sprint Contract materializado en `contract/sprint_contract.template.md`
+    (molde, base diseño §9; con `Instancias:` A/B/C y bloque de gate P5). Abre **D-016 PENDIENTE**
+    (cableado de la entrevista humano↔dialoguer en el modelo plano).
+  - **Falta el walking skeleton:** C-1 (A), C-2 (B), C-3 (dialoguer), C-5 (synthesizer), C-6 (C) →
+    producir `shared_understanding.md` + `verdict.json` con el gate humano. Valida el modelo plano y
+    resuelve D-016 en la práctica.
 
 ## T-011 — Flujo de despliegue del harness 010 (construcción → operación) — PRÓXIMA
 Materializa el **criterio Done #6 del plan** ("procedimiento de despliegue"). Flujo de **3 comandos**

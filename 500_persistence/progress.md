@@ -28,8 +28,13 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
 - **Backlog de ideas (D-015):** nuevo `500_persistence/backlog.md` para ideas sin compromiso
   (estados `No implementada`/`Implementada`/`Descartada`; las descartadas NO se borran) + comando
   `/pure-idea` para capturarlas en cualquier momento. Primera idea: **I-001 cerebro global**.
-- **Próximo paso (T-010 → INC-1):** materializar el Sprint Contract en `contract/` y construir el
-  walking skeleton end-to-end (A→B→1 worker→C produce `shared_understanding.md` + `verdict.json`).
+- **INC-1 en curso (T-010):** **C-8 HECHO** — Sprint Contract materializado en
+  `contract/sprint_contract.template.md` (molde, base diseño §9, con línea `Instancias:` A/B/C y
+  bloque de gate P5). **Pendiente D-016:** cómo se cablea la entrevista humano↔dialoguer en el
+  modelo plano (se resuelve al construir el skeleton).
+- **Próximo paso (T-010 → INC-1):** construir el walking skeleton end-to-end (C-1 A, C-2 B,
+  C-3 dialoguer, C-5 synthesizer, C-6 C) → produce `shared_understanding.md` + `verdict.json` con el
+  gate humano.
 
 ## Índice de sesiones / hitos
 
@@ -41,6 +46,7 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
 | S-004 | 2026-06-16 | Git/GitHub + meta decidida + brief/diseño/plan del 010 | Repo enlazado y autopush; D-007 resuelta; 3 docs del 010 aprobados; modelo de ejecución plano |
 | S-005 | 2026-06-16 | INC-0: andamiaje del harness 010 + cierre P-1/P-2/P-3 | `920_build/010_discovery/` con 7 subcarpetas (schemas/evaluation/contract/skills/deliverables/knowledge/agents); D-013, D-014; L-006, L-007 |
 | S-006 | 2026-06-17 | Backlog de ideas + comando `/pure-idea` + idea cerebro global | Nuevo `backlog.md` (5º archivo de persistencia) y `/pure-idea`; I-001 cerebro global; D-015; L-008 (concurrencia 2 terminales) |
+| S-007 | 2026-06-17 | INC-1 paso 1: Sprint Contract (C-8) materializado | `contract/sprint_contract.template.md` (molde + `Instancias:` A/B/C + gate P5); D-016 PENDIENTE (entrevista humano↔dialoguer) |
 
 ---
 
@@ -191,3 +197,25 @@ paralelo real.
 
 **Dónde quedamos:** Tooling de persistencia ampliado (backlog + `/pure-idea`). T-010 (INC-1) sigue
 siendo la próxima tarea de construcción del harness, sin cambios.
+
+---
+
+## S-007 — 2026-06-17 — INC-1 (paso 1): Sprint Contract materializado y duda de la entrevista
+
+**Qué se hizo:**
+- **C-8 (Sprint Contract) materializado** como molde en
+  `920_build/010_discovery/contract/sprint_contract.template.md`, base en diseño §9. Es **plantilla**
+  (D-002/L-006): A la instancia, propone al humano y aprueba en runtime (gate P5).
+- Se añadió a petición del usuario una línea **`Instancias:`** (A=Governor C-1 · B=phase-orchestrator-010
+  C-2 · C=phase-evaluator-010 C-6) y un bloque **"Aprobación del contrato (gate P5)"**.
+- Se aclaró la diferencia **molde vs. instancia** del contrato y que su "salida" es el **acuerdo
+  aprobado** (gobernanza), no los entregables: los 5 artefactos + transcript/analysis los producen
+  los **workers**, no el contrato.
+- Se aclaró **quién entrevista**: el `discovery-dialoguer` (C-3) posee el guión socrático y el
+  `dialogue_transcript.md`, pero en el modelo plano (D-011) el canal en vivo con el humano lo opera A.
+
+**Decisión registrada (D-016, PENDIENTE):** cómo se cablea exactamente la entrevista humano↔dialoguer
+en el modelo plano (A media vs. el dialoguer pregunta en vivo). Se resuelve al construir el skeleton.
+
+**Dónde quedamos:** INC-1 paso 1 completo (C-8). Falta el grueso de INC-1: el **walking skeleton**
+(C-1, C-2, C-3, C-5, C-6) que produce `shared_understanding.md` + `verdict.json` con el gate.

@@ -22,6 +22,7 @@
 | D-013 | Cierre de decisiones abiertas del plan (P-1/P-2/P-3) | FIRME | Ubicación `920_build/010_discovery/`; Governor = CLAUDE.md+1 comando; modelos Opus/Sonnet por agente |
 | D-014 | Estructura interna del build del harness 010 | FIRME | 7 subcarpetas: `agents/ schemas/ evaluation/ contract/ skills/ deliverables/ knowledge/`; runtime = MOLDES |
 | D-015 | Backlog de ideas (`backlog.md`) + comando `/pure-idea` | FIRME | 5º archivo de persistencia para ideas sin compromiso; descartadas no se borran |
+| D-016 | Cómo se cablea la entrevista humano↔dialoguer en el modelo plano | PENDIENTE | El dialoguer posee el guión/transcript, pero la charla en vivo la opera A; resolver en INC-1 |
 
 ---
 
@@ -175,3 +176,20 @@ y hace un commit **acotado solo a ese archivo** para ser robusto a una segunda t
 Mover estados sigue siendo parte de `/pure-progress` al cierre.
 **Consecuencias:** El protocolo de sesión (CLAUDE.md) ahora tiene 5 archivos de persistencia, no 4
 (pendiente reflejarlo en CLAUDE.md si se desea formalizar). El single-writer (D-003) sigue vigente.
+
+## D-016 — Cómo se cablea la entrevista humano↔dialoguer en el modelo plano
+**Fecha:** 2026-06-17 · **Estado:** PENDIENTE
+**Contexto:** El diseño (§3/§4) asigna la entrevista socrática al worker `discovery-dialoguer`
+(C-3), que posee el guión I-1…I-5 y produce `dialogue_transcript.md`. Pero una entrevista es
+**interactiva y multironda**, y en el modelo plano (D-011) los workers son subagentes **amnésicos**
+(L-001) que corren, producen un artefacto y vuelven: la única instancia que conversa con el humano
+en tiempo real es **A (Governor)**.
+**Opciones:**
+1. **A media la conversación:** el dialoguer genera/estructura las preguntas; A las presenta a
+   Sabbia, recoge respuestas y las realimenta; el dialoguer arma el transcript. (Coherente con el
+   modelo plano; preferida a priori.)
+2. **El dialoguer entrevista en vivo:** solo si el runtime permite que un subagente prompt-ee al
+   humano directamente. Más frágil entre versiones (motivo de D-011 / L-005).
+**Por qué pendiente:** Se resuelve al construir el **walking skeleton de INC-1**, que debe ejercitar
+la interacción humano↔dialoguer y validar empíricamente cuál opción sostiene el modelo plano.
+**Consecuencias:** Condiciona el cableado de C-1 (A) y C-3 (dialoguer) y los checkpoints CP-01a/CP-01.
