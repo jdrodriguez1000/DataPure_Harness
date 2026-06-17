@@ -1,0 +1,34 @@
+{
+  "_comment": "PLANTILLA (plano de construccion, D-002). Estado de EJECUCION de la fase 010. En el modelo plano (D-011), A (sesion principal) persiste los checkpoints; B aporta el orchestration_plan inicial. Valores con <...> son marcadores.",
+  "schema_version": "0.1",
+  "phase": "010_discovery",
+  "mode": "INICIO",
+  "_mode_enum": ["INICIO", "CONTINUACION"],
+  "execution_status": "NOT_STARTED",
+  "_execution_status_enum": ["NOT_STARTED", "PLANNING", "EXECUTING", "EXECUTION_COMPLETE"],
+  "orchestration_plan": {
+    "_comment": "Devuelto por B. Lista ordenada de workers a invocar con sus inputs.",
+    "workers": [],
+    "_workers_item_shape": {
+      "worker": "discovery-dialoguer | discovery-analyst | discovery-synthesizer",
+      "order": 0,
+      "inputs": ["<path o id de input>"],
+      "expected_output": "<path del artefacto>"
+    }
+  },
+  "checkpoints": {
+    "CP-01a": { "reached": false, "stakeholders_done": [], "transcript_path": null },
+    "CP-01":  { "reached": false, "transcript_path": null },
+    "CP-02":  { "reached": false, "analysis_path": null, "clarification_iterations": 0 },
+    "CP-03":  { "reached": false, "artifact_paths": [] },
+    "CP-04":  { "reached": false, "approved_at": null }
+  },
+  "clarification_loop": {
+    "iterations": 0,
+    "max_iterations": 3,
+    "pending_questions": [],
+    "unresolved": []
+  },
+  "last_checkpoint": null,
+  "updated_at": null
+}

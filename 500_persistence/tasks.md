@@ -15,7 +15,7 @@
 | T-007 | HECHA | Git/GitHub (init `main` + remote + autopush en `/pure-progress`) |
 | T-005 | HECHA | Decidir la **meta del proyecto** → construir el harness 010 (brief→diseño→plan→construir) |
 | T-009 | HECHA | Ciclo de definición del harness 010: brief + diseño + plan (los 3 APROBADOS) |
-| T-010 | PRÓXIMA | **Construir el harness 010** ejecutando el plan: INC-0 (andamiaje + P-1/P-2/P-3) → INC-1 (walking skeleton) |
+| T-010 | EN CURSO | **Construir el harness 010**: INC-0 HECHO (andamiaje + P-1/P-2/P-3); sigue INC-1 (walking skeleton) |
 | T-006 | PRÓXIMA | Reconciliar nombres/numeración de harnesses (statement §9 ↔ `700_harnesses/`) y mapear el 100 a capas |
 
 ---
@@ -60,12 +60,14 @@ Creados y APROBADOS los 3 documentos del 010: `900_brief/010_discovery.md`,
 `905_design/010_discovery.md`, `910_plan/010_discovery.md`. El diseño fija el modelo de ejecución
 plano (D-011). Detalle en `progress.md` → S-004.
 
-## T-010 — Construir el harness 010 — PRÓXIMA
-Ejecutar `910_plan/010_discovery.md`. Empezar por **INC-0**: crear el andamiaje
-`920_build/010_discovery/` y **cerrar las decisiones abiertas P-1** (ubicación de artefactos
-construidos), **P-2** (forma del Governor: CLAUDE.md del harness + comando) y **P-3** (modelo por
-agente). Luego **INC-1**: walking skeleton end-to-end (A→B→1 worker→C produce un artefacto) para
-validar el modelo plano antes de ensanchar.
+## T-010 — Construir el harness 010 — EN CURSO
+Ejecutar `910_plan/010_discovery.md`.
+- **INC-0 — HECHO (S-005):** andamiaje `920_build/010_discovery/` creado (agents/, schemas/,
+  contract/, skills/, deliverables/) con esquemas C-7/C-9 plantilla y los 5 moldes de entregables.
+  P-1/P-2/P-3 cerradas en D-013; estructura interna fijada en D-014.
+- **INC-1 — PRÓXIMO:** materializar el Sprint Contract en `contract/` (C-8, base en diseño §9) y
+  construir el walking skeleton end-to-end (A→B→1 worker→C produce `shared_understanding.md` +
+  `verdict.json`, con el gate humano) para validar el modelo plano antes de ensanchar.
 
 ## T-006 — Reconciliar harnesses — PRÓXIMA
 Alinear nombres y numeración entre `800_documents/statement.md` §9 y `700_harnesses/`; decidir cómo

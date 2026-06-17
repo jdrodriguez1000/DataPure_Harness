@@ -1,0 +1,24 @@
+{
+  "_comment": "PLANTILLA (C-9, plano de construccion). Salida de la Instancia C (Phase Evaluator). Rubrica del diseño §10. Gate: promedio >= 0.75 y ninguna dimension < 0.5. Veto: D5 = 0.0 -> REJECTED automatico.",
+  "schema_version": "0.1",
+  "phase": "010_discovery",
+  "verdict": "PENDING",
+  "_verdict_enum": ["APPROVED", "REJECTED", "PENDING"],
+  "scores": {
+    "D1_cobertura_actores": null,
+    "D2_claridad_intencion": null,
+    "D3_gestion_contradicciones": null,
+    "D4_cobertura_fallos": null,
+    "D5_aprobacion_explicita": null,
+    "D6_cierre_decisiones_sec10": null
+  },
+  "average": null,
+  "gate_pass": null,
+  "veto_triggered": false,
+  "_veto_rule": "D5 == 0.0 -> veto",
+  "reasons": [],
+  "recommendations": [],
+  "failed_workers": [],
+  "_failed_workers_comment": "Workers a re-invocar si REJECTED tecnico (protocolo 12.4).",
+  "evaluated_at": null
+}

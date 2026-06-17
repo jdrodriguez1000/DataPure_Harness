@@ -1,0 +1,9 @@
+# Marcador de carpeta. Aqui se guardan las SKILLS (habilidades) que creemos para los agentes
+# del harness 010. Una skill encapsula una capacidad reutilizable (instrucciones + recursos)
+# que un agente invoca. Se despliegan junto a agents/ a la terminal de operacion.
+#
+# Candidatas (a definir en INC-1+):
+#   - cuestionamiento socratico (dialoguer): de amplio a estrecho (E11)
+#   - deteccion de contradicciones/vacios (analyst, con reasoning E8)
+#   - sintesis de artefactos de Discovery (synthesizer)
+#   - aplicacion de rubrica D1-D6 (phase-evaluator-010)

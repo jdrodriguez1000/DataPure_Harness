@@ -1,0 +1,7 @@
+# Marcador de carpeta. Aqui se construyen los subagentes del harness 010 (INC-1+):
+#   C-2 phase-orchestrator-010 (B, planificador; SIN Agent en tools)
+#   C-3 discovery-dialoguer (Worker; Read,Write,Edit)
+#   C-4 discovery-analyst   (Worker; Read,Write,Edit + reasoning E8)
+#   C-5 discovery-synthesizer (Worker; Read,Write,Edit)
+#   C-6 phase-evaluator-010 (C, independiente; rubrica embebida)
+# Modelos (P-3): Opus para B, analyst y C; Sonnet para dialoguer y synthesizer.

@@ -9,7 +9,8 @@
 Estamos construyendo el **harness 010 (Discovery)**, el primero del *meta-harness* **DataPure
 Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/statement.md`). Ya está
 **decidida la meta** (D-007 FIRME) y completado el ciclo de definición del 010 con tres documentos
-**APROBADOS**: brief → diseño → plan. Falta **construir** el harness (ejecutar el plan).
+**APROBADOS**: brief → diseño → plan. **En construcción (T-010):** **INC-0 HECHO** — andamiaje
+`920_build/010_discovery/` creado y P-1/P-2/P-3 cerradas. Próximo: **INC-1** (walking skeleton).
 
 - **Repo en git/GitHub (D-010):** `main` enlazado a `https://github.com/jdrodriguez1000/DataPure_Harness.git`.
   `/pure-progress` ahora hace commit + push al cerrar sesión.
@@ -19,8 +20,11 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
   único spawner; B planifica; los subagentes no spawnean de forma fiable entre versiones.
 - **Dos planos (D-002):** esta terminal construye; el harness corre en OTRA terminal con su propia
   persistencia (`claude-progress.txt`, `harness-state.json`, `execution-state.json`). No mezclar.
-- **Próximo paso (T-010):** ejecutar el plan — **INC-0** (andamiaje `920_build/010_discovery/` +
-  cerrar decisiones abiertas P-1/P-2/P-3) y luego **INC-1** (walking skeleton end-to-end).
+- **Estructura del build (D-014):** `920_build/010_discovery/` con `agents/`, `schemas/` (C-7/C-9,
+  plantillas), `contract/` (solo Sprint Contract), `skills/` (habilidades de agentes) y
+  `deliverables/` (moldes de los 5 entregables — son salidas de runtime; aquí solo plantillas).
+- **Próximo paso (T-010 → INC-1):** materializar el Sprint Contract en `contract/` y construir el
+  walking skeleton end-to-end (A→B→1 worker→C produce `shared_understanding.md` + `verdict.json`).
 
 ## Índice de sesiones / hitos
 
@@ -30,6 +34,7 @@ Harness** (Familia A) que fabricará el SaaS **Data Pure** (`800_documents/state
 | S-002 | 2026-06-16 | Andamiaje operativo | Comandos `/pure-next` y `/pure-progress`, `CLAUDE.md` y settings de proyecto/local |
 | S-003 | 2026-06-16 | Renombrado de carpetas con prefijo numérico | `500_persistence/`, `700_harnesses/`, `800_documents/`, `810_inputs/` + todas las referencias |
 | S-004 | 2026-06-16 | Git/GitHub + meta decidida + brief/diseño/plan del 010 | Repo enlazado y autopush; D-007 resuelta; 3 docs del 010 aprobados; modelo de ejecución plano |
+| S-005 | 2026-06-16 | INC-0: andamiaje del harness 010 + cierre P-1/P-2/P-3 | `920_build/010_discovery/` con schemas/contract/skills/deliverables; D-013 y D-014; L-006 |
 
 ---
 
@@ -118,3 +123,26 @@ robusto a la versión del runtime.
 **Dónde quedamos:** Definición del 010 cerrada y aprobada. La próxima tarea (T-010) es **ejecutar el
 plan**: INC-0 (andamiaje `920_build/010_discovery/` + cerrar P-1/P-2/P-3) y luego INC-1 (walking
 skeleton end-to-end).
+
+---
+
+## S-005 — 2026-06-16 — INC-0: andamiaje del harness 010 y cierre de decisiones abiertas
+
+**Qué se hizo:**
+- **INC-0 del plan ejecutado.** Se creó la estructura `920_build/010_discovery/` con `README.md` y
+  subcarpetas: `agents/` (marcador), `schemas/`, `contract/`, `skills/`, `deliverables/`.
+- **Esquemas mínimos C-7/C-9 (PLANTILLAS, no instancias — D-002):** `harness-state.template.json`,
+  `execution-state.template.json`, `claude-progress.template.txt`, `verdict.template.json`,
+  `metrics_summary.template.json`. Los 4 JSON validados sintácticamente (criterio Done de INC-0).
+- **Cierre de P-1/P-2/P-3 (D-013):** ubicación `920_build/010_discovery/`; Governor = CLAUDE.md del
+  harness + 1 comando; modelos Opus (B/analyst/C) y Sonnet (dialoguer/synthesizer).
+- **Ajuste de estructura solicitado por el usuario (D-014):** `templates/`→`contract/` (solo el
+  Sprint Contract); nueva `skills/` (habilidades de agentes); nueva `deliverables/` con **moldes**
+  de los 5 entregables (`*.template.md`) + su README.
+
+**Hallazgo clave (L-006):** Los 5 entregables del harness son **salidas de runtime** (plano de
+operación). Para tenerlos en construcción sin romper D-002, se guardan como **plantillas/moldes**,
+no como instancias; las reales las produce el synthesizer en la otra terminal.
+
+**Dónde quedamos:** INC-0 completo. La próxima es **INC-1** (T-010 sigue EN CURSO): materializar el
+Sprint Contract en `contract/` y construir el walking skeleton end-to-end.

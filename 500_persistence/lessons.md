@@ -12,6 +12,7 @@
 | L-003 | Los harnesses tienen madurez desigual | Tratar 060–100 como esqueléticos: requieren completarse antes de operarse |
 | L-004 | No toda mención a `persistence/` es la carpeta de este repo | Al renombrar/refactorizar, distinguir plano de construcción vs. operación antes de tocar referencias |
 | L-005 | Verificar capacidades de la plataforma en la doc, no de memoria | Ante restricciones de Claude Code, consultar docs actuales (find-docs/WebFetch) antes de fijar arquitectura |
+| L-006 | Los entregables del harness son salidas de runtime | En construcción guardar **moldes** (`*.template`), nunca instancias reales (D-002) |
 
 ---
 
@@ -60,3 +61,15 @@ una premisa de memoria puede llevar a restricciones falsas o a diseños frágile
 **verificar en la documentación actual** (find-docs / WebFetch) antes de fijarla. Cuando el runtime
 sea de versión no controlada, preferir el **diseño robusto a la versión** (p. ej. el modelo plano,
 D-011) aunque la capacidad nueva exista.
+
+## L-006 — Los entregables del harness son salidas de runtime, no archivos de construcción
+**Contexto:** Al andamiar `deliverables/` (INC-0), surgió la duda de si los 5 artefactos del 010
+(`shared_understanding.md`, etc.) viven en este repo. Son **salidas que produce el harness al
+ejecutarse** (synthesizer, en la terminal de operación), no archivos del plano de construcción.
+**Aprendizaje:** Confundir "definir el entregable" con "producir el entregable" reintroduce la mezcla
+de planos (D-002): meter las instancias reales en el repo de construcción rompería la separación y
+chocaría con el `.gitignore`.
+**Regla para el futuro:** En el plano de construcción solo se guardan **moldes/plantillas**
+(`*.template.*`) de los entregables; las **instancias** se generan en runtime y permanecen en la
+terminal de operación. Antes de crear una carpeta de "salidas", clasificar: ¿molde (construcción) o
+instancia (operación)?

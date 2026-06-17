@@ -19,6 +19,8 @@
 | D-010 | Git/GitHub + autopush en `/pure-progress` | FIRME | `main` enlazado a remote; el cierre de sesión hace commit+push |
 | D-011 | Modelo de ejecución del harness = **plano** | FIRME | A=sesión principal y único spawner; B planifica; robusto a la versión del runtime |
 | D-012 | Convención de fases de construcción por harness | FIRME | `900_brief/` → `905_design/` → `910_plan/` → `920_build/`; orden del método |
+| D-013 | Cierre de decisiones abiertas del plan (P-1/P-2/P-3) | FIRME | Ubicación `920_build/010_discovery/`; Governor = CLAUDE.md+1 comando; modelos Opus/Sonnet por agente |
+| D-014 | Estructura interna del build del harness 010 | FIRME | `agents/ schemas/ contract/ skills/ deliverables/`; `deliverables/` guarda MOLDES, no instancias |
 
 ---
 
@@ -126,3 +128,26 @@ también la escritura de `execution-state.json` (checkpoints). Aplicado en `905_
 **Consecuencias:** Reusable para 020–100. Los artefactos de `920_build/` son definiciones (plano de
 construcción) que se despliegan al `.claude/agents/` de la terminal de operación; las *instancias* de
 estado se crean en runtime (D-002).
+
+## D-013 — Cierre de decisiones abiertas del plan (P-1/P-2/P-3)
+**Fecha:** 2026-06-16 · **Estado:** FIRME
+**Contexto:** El plan `910_plan/010_discovery.md` §9 dejaba 3 decisiones a cerrar en INC-0.
+**Decisión:**
+- **P-1 (ubicación de artefactos construidos):** `920_build/010_discovery/` (coincide con D-012).
+- **P-2 (forma del Governor, C-1):** **CLAUDE.md del harness + 1 comando** (no varios comandos).
+- **P-3 (modelo por agente):** **Opus** para B (phase-orchestrator), analyst y C (evaluator);
+  **Sonnet** para dialoguer y synthesizer (ejecución documental).
+**Consecuencias:** Desbloquea INC-0/INC-1. Los modelos se fijan al construir cada agente en `agents/`.
+
+## D-014 — Estructura interna del build del harness 010
+**Fecha:** 2026-06-16 · **Estado:** FIRME
+**Contexto:** Al andamiar INC-0 el usuario pidió ajustes a la organización de `920_build/010_discovery/`.
+**Decisión:** Subcarpetas: **`agents/`** (subagentes B/workers/C), **`schemas/`** (plantillas de
+estado C-7 y de veredicto/métricas C-9), **`contract/`** (SOLO el Sprint Contract C-8; renombrada
+desde la propuesta `templates/`), **`skills/`** (habilidades reutilizables de los agentes) y
+**`deliverables/`** (plantillas/**moldes** de los 5 entregables principales).
+**Alcance (importante, D-002):** `deliverables/` guarda **moldes** (`*.template.md`), NO las
+instancias reales: esas son salidas de runtime y viven en la terminal de operación (ver L-006). Si en
+el futuro se quisiera que `deliverables/` fuera el destino real de los documentos, habría que revisar
+la separación de planos y el `.gitignore` (decisión pendiente, no tomada).
+**Consecuencias:** Extiende D-012. Patrón reusable para 020–100.

@@ -1,0 +1,27 @@
+{
+  "_comment": "PLANTILLA (C-9, plano de construccion). Salida de la Instancia C junto con verdict.json. Metricas Tipo 1 (operativas por agente) y Tipo 2 (de calidad del resultado).",
+  "schema_version": "0.1",
+  "phase": "010_discovery",
+  "type1_operational": {
+    "_comment": "Por agente: latencia y consumo de tokens.",
+    "per_agent": [],
+    "_per_agent_item_shape": {
+      "agent": "<phase-orchestrator-010 | discovery-dialoguer | discovery-analyst | discovery-synthesizer | phase-evaluator-010>",
+      "latency_ms": null,
+      "input_tokens": null,
+      "output_tokens": null
+    },
+    "total_tokens": null,
+    "wall_clock_ms": null
+  },
+  "type2_quality": {
+    "_comment": "Calidad del resultado de la fase.",
+    "actors_covered": null,
+    "actors_with_value_goal": null,
+    "contradictions_open": null,
+    "failure_scenarios": null,
+    "section10_decisions_closed": null,
+    "clarification_iterations": null
+  },
+  "generated_at": null
+}

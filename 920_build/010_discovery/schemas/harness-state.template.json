@@ -1,0 +1,36 @@
+{
+  "_comment": "PLANTILLA (plano de construcción, D-002). No es una instancia. Las instancias se crean en runtime en la terminal de operacion. Valores con <...> son marcadores. Estado estrategico del harness; escritor unico: A (sesion principal).",
+  "schema_version": "0.1",
+  "product": "Data Pure",
+  "harness_family": "A",
+  "current_phase": "010_discovery",
+  "phases": {
+    "010_discovery": {
+      "status": "NOT_STARTED",
+      "_status_enum": ["NOT_STARTED", "IN_PROGRESS", "IN_REWORK", "HOLD", "PHASE_COMPLETE"],
+      "sprint_contract_approved": false,
+      "approved_at": null,
+      "verdict": null,
+      "artifacts": {
+        "shared_understanding": null,
+        "scope_boundaries": null,
+        "domain_glossary": null,
+        "failure_behavior": null,
+        "product_brief_validated": null
+      }
+    }
+  },
+  "escalations": [],
+  "_escalations_item_shape": {
+    "phase": "<phase_id>",
+    "reason": "<motivo del bloqueo>",
+    "raised_at": "<iso8601>",
+    "context": "<contexto completo para el humano>",
+    "resolved": false
+  },
+  "knowledge": {
+    "decisions_library": null,
+    "lessons_learned": null
+  },
+  "updated_at": null
+}

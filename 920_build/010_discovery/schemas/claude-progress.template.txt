@@ -1,0 +1,22 @@
+PLANTILLA — claude-progress.txt (plano de operacion, D-002)
+===========================================================
+Bitacora narrativa de la ejecucion del harness 010. La escribe la INSTANCIA ACTIVA en cada
+momento (A, B, Worker o C). No es persistencia estructurada (eso son los .json); es el relato
+cronologico para reanudar con contexto (ritual E10-B).
+
+Esta es una PLANTILLA: se copia a la terminal de operacion y alli se llena en runtime.
+No es una instancia. Las lineas <...> son marcadores.
+
+---
+[<iso8601>] [A] INICIO — Modo: <INICIO|CONTINUACION>. Sprint Contract presentado al humano.
+[<iso8601>] [A] Gate P5: contrato APROBADO. Invoco a B (planificar).
+[<iso8601>] [B] orchestration_plan devuelto: dialoguer -> analyst -> synthesizer.
+[<iso8601>] [A] Plan persistido en execution-state.json. Invoco a discovery-dialoguer.
+[<iso8601>] [dialoguer] Transcript escrito: /010_discovery/dialogue_transcript.md. CP-01.
+[<iso8601>] [A] Invoco a discovery-analyst.
+[<iso8601>] [analyst] analysis_report.md. Estado: <LISTO PARA SINTESIS | PENDIENTE DE ACLARACION>. CP-02.
+[<iso8601>] [A] Invoco a discovery-synthesizer.
+[<iso8601>] [synthesizer] 5 artefactos en draft. CP-03. A presenta a Sabbia.
+[<iso8601>] [A] Sabbia aprueba. CP-04. Invoco a C (auditar).
+[<iso8601>] [C] verdict.json: <APPROVED|REJECTED>. A decide <Avanzar|Repetir>.
+[<iso8601>] [A] PHASE_COMPLETE. Handoff al 020.
